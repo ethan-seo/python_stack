@@ -1,0 +1,11 @@
+Create virtual env
+Windows: | python -m venv py3Env   
+
+Run virtual env
+Windows command prompt : | call py3Env\Scripts\activate
+Windows git bash : | source py3Env/Scripts/activate   
+
+pip list
+
+close virtual env
+deactivate

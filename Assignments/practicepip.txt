@@ -1,0 +1,36 @@
+Run the following commands:
+
+pip install Django==1.11.9
+>Installs django version 1.11.9
+
+pip list
+>lists installed packages
+
+deactivate (This will deactivate your virtual environment)
+>Closes virtual environment
+
+pip3 list (How is the result different from when you ran pip list with the virtualenv activated? Hint, you should not have as many things listed when the virtualenv is deactivated. If your results are the same, go back and figure out what went wrong.)
+> command for non-virtual terminal, and the result will have all the native and installed packges of the machine and not virtual machine
+
+source myEnvironments/py3Env/Scripts/activate (Adjust the path as needed to re-activate the virtualenv; for windows call myEnvironments/py3Env/Scripts/activate)
+>Runs the environmetn
+
+pip install Django==1.11.9 (We know you already ran this one. What information do you see returned in terminal after this command?)
+>Basically that it is already installed
+>Requirement already satisfied: Django==1.11.9 in c:\users\ethan seo\onedrive\documents\cd\python_stack\my_environments\py3env\lib\site-packages (1.11.9)
+Requirement already satisfied: pytz in c:\users\ethan seo\onedrive\documents\cd\python_stack\my_environments\py3env\lib\site-packages (from Django==1.11.9) (2020.1)
+
+pip freeze (What's the difference between freeze and list?)
+>pip freeze shows what I installed vs list showing all packages
+
+First cd into your Desktop directory (cd ~/Desktop), then run this command: pip freeze > requirements.txt. What do you see when you ls? What's inside this file?
+>The requirements.txt file is created and the content shows the returned values
+
+pip uninstall Django
+>uninstalls Django
+
+pip show Django
+>Shows additional info including the path of installation
+
+pip search Flask This one might take a moment to execute.
+>Searchs and shows all files including Flask
