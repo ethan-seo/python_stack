@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninja Gold</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css'%}">
+</head>
+<body>
+    <h1>Ninja Gold</h1>
+    <h2>Your Gold: {{request.session.gold}}</h2>
+    <h3>Farm</h3>
+    <p>(earns 10-20 golds)</p>
+    <form action="/process_money" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="location" value="farm">
+        <button>Find Gold!</button>
+    </form>
+    <h3>Cave</h3>
+    <p>(earns 5-10 golds)</p>
+    <form action="/process_money" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="location" value="cave">
+        <button>Find Gold!</button>
+    </form>
+    <h3>House</h3>
+    <p>(earns 2-5 golds)</p>
+    <form action="/process_money" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="location" value="house">
+        <button>Find Gold!</button>
+    </form>
+    <h3>Casino</h3>
+    <p>(earns/takes 0-50 golds)</p>
+    <form action="/process_money" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="location" value="casino">
+        <button>Find Gold!</button>
+    </form>
+    <h4>Activities</h4>
+    <div id="activities">
+    {% for activity in request.session.activities reversed %}
+        <p class="{{ activity.result }}">{{ activity.activitylog }}</p>
+    {% endfor %}
+    <a href="/reset"><button>Reset</button></a>
+</body>
+</html>
