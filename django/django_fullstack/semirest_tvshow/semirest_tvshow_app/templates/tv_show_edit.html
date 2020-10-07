@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Show Edit</title>
+</head>
+<body>
+    <h1>Edit Show {{tv_show.id}}</h1>
+    <form action="/shows/{{tv_show.id}}/update" method="POST">
+        {% csrf_token %}
+        Title: <input type="text" name="title" value="{{tv_show.title}}">
+        Network: <input type="text" name="network" value="{{tv_show.network}}">
+        Release Date: <input type="date" name="release_date" value="{{tv_show.release_date|date:'Y-m-d'}}">
+        Description: <input type="text" name="description" value="{{tv_show.description}}">
+        <input type="submit" value="Update">
+    </form>
+    <a href="/shows/{{tv_show.id}}">Go to Show</a>
+    <a href="/shows">Go Back</a>
+</body>
+</html>
