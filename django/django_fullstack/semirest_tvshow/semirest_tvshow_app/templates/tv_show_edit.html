@@ -6,6 +6,13 @@
     <title>TV Show Edit</title>
 </head>
 <body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <h1>Edit Show {{tv_show.id}}</h1>
     <form action="/shows/{{tv_show.id}}/update" method="POST">
         {% csrf_token %}
