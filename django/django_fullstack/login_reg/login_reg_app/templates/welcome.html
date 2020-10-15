@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+</head>
+
+<body>
+    <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    <h2>Success! Welcome, {{user.first_name}}!</h2>
+    <h2>Successfully registered (or logged in)!</h2>
+    <a href="/logout">Logout</a>
+</body>
+
+</html>
