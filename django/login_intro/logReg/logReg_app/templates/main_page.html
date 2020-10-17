@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+</head>
+<body>
+    <ul class="messages">
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    <h1>Congrats <a href="/user">{{user.name}}</a>! You made it to the main page.</h1>
+    <a href="/logout">Logout</a>
+    <h1>Submit a Koala for the contest!</h1>
+    <form action="/koalas/create" method="POST">
+        {% csrf_token %}
+        Name: <input type="text" name="koala_name">
+        Talent: <input type="text" name="talent">
+        <input type="submit" value="Submit Koala">
+    </form>
+    <a href="/voting">Voting Page</a>
+    <h1>Our Koalas</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Talent</th>
+            <th>Owner</th>
+            <th>Actions</th>
+        </tr>
+        {% for koala in user.koalas_owned.all %}
+        <tr>
+            <td>{{koala.name}}</td>
+            <td>{{koala.talent}}</td>
+            <td>{{koala.user.name}}</td>
+            <td>
+                <form action="/koalas/destroy/{{koala.id}}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete Koala">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h1>Not Our Koalas</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Talent</th>
+            <th>Owner</th>
+            <th>Actions</th>
+        </tr>
+        {% for koala in all_koalas %}
+            {% if koala.user != user %}
+            <tr>
+                <td>{{koala.name}}</td>
+                <td>{{koala.talent}}</td>
+                <td>{{koala.user.name}}</td>
+                <td></td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koala Profile</title>
+</head>
+<body>
+    <h1>Name: {{koala.name}}</h1>
+    <h2>Talent: {{koala.talent}}</h2>
+    <h2>Owner's Name: {{koala.user.name}}</h2>
+    <a href="/main_page">Home</a>
+    <h2>Users that voted for {{koala.name}}</h2>
+    <ul>
+        {% for one_user in koala.users_votes.all %}
+        <li>{{one_user.name}}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

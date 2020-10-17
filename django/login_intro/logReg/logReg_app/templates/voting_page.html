@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voting Page</title>
+</head>
+
+<body>
+    <h1>Voting Page</h1>
+    <a href="/main_page">Home</a>
+    <h1>Koalas you have voted for</h1>
+    <table>
+        <tr>
+            <th>Name</td>
+            <th># of Votes</td>
+            <th>Actions</td>
+        </tr>
+        {% for koala in user.voted_koalas.all %}
+        <tr>
+            <td>{{koala.name}}</td>
+            <td>{{koala.users_votes.count}} vote(s)</td>
+            <td>
+                {% if user not in koala.users_votes.all %}
+                <form action="/koalas/cast_vote/{{koala.id}}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="Vote for {{koala.name}}">
+                </form>
+                {% else %}
+                <form action="/koalas/uncast_vote/{{koala.id}}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="Unvote for {{koala.name}}">
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h1>Koalas you have not voted for</h1>
+    <table>
+        <tr>
+            <th>Name</td>
+            <th># of Votes</td>
+            <th>Actions</td>
+        </tr>
+        {% for koala in all_koalas %}
+        {% if user not in koala.users_votes.all %}
+        <tr>
+            <td>{{koala.name}}</td>
+            <td>{{koala.users_votes.count}} vote(s)</td>
+            <td>
+                {% if user not in koala.users_votes.all %}
+                <form action="/koalas/cast_vote/{{koala.id}}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="Vote for {{koala.name}}">
+                </form>
+                {% else %}
+                <form action="/koalas/uncast_vote/{{koala.id}}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="Unvote for {{koala.name}}">
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+</body>
+
+</html>

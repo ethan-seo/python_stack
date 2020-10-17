@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+</head>
+<body>
+    <ul class="messages">
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    <h1>Name: {{user.name}}</h1>
+    <h2>Email: {{user.email}}</h2>
+    <h2>Koalas Owned: </h2>
+    <ul>
+        {% for koala in user.koalas_owned.all %}
+        <li><a href="/koalas/show/{{koala.id}}">{{koala.name}}</a></li>
+        {% endfor %}
+    </ul>
+    <h2>Koalas Voted For: </h2>
+    <ul>
+        {% for koala in user.voted_koalas.all %}
+        <li><a href="/koalas/show/{{koala.id}}"></a>{{koala.name}}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
